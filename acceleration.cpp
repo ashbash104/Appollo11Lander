@@ -18,11 +18,8 @@
   *********************************************/
 void Acceleration::add(const Acceleration& acceleration)
 {
-   double x = acceleration.ddx;
-   double y = acceleration.ddy;
-
-   ddx = getDDX() + x;
-   ddy = getDDY() + y;
+   ddx += acceleration.ddx;
+   ddy += acceleration.ddy;
 }
 
 /*********************************************
@@ -31,40 +28,6 @@ void Acceleration::add(const Acceleration& acceleration)
  *********************************************/
 void Acceleration::set(const Angle& angle, double magnitude)
 {
-   double deg = angle.getRadians();
-
-   // set_up
-   if (deg == 360 or deg == 0)
-   {
-      ddx = 0;
-      ddy = magnitude;
-   }
-
-   // set_right
-   else if (deg == 90)
-   {
-      ddx = magnitude;
-      ddy = 0;
-   }
-
-   // set_down
-   else if (deg == 180)
-   {
-      ddx = 0;
-      ddy = -magnitude;
-   }
-
-   // set_left
-   else if (deg == 270)
-   {
-      ddx = -magnitude;
-      ddy = 0;
-   }
-
-   // set_diagonal
-   else
-   {
-      ddx = magnitude * sin(deg);
-      ddy = magnitude * cos(deg);
-   }
+   ddx = magnitude * sin(angle.getRadians());
+   ddy = magnitude * cos(angle.getRadians());
 }

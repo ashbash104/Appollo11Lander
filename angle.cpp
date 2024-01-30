@@ -18,20 +18,18 @@ using namespace std;
  ************************************/
 double Angle::normalize(double radians) const
 {
-   if (radians > 2 * M_PI)
+   // Updated the if statements to follow Bro. H's solution
+   if (radians >= (M_PI * 2.0))
    {
-      while (radians > 2 * M_PI)
-      {
-         radians -= 2 * M_PI;
-      }
+      double multiples = floor(radians / (M_PI * 2.0));
+
+      return radians - ((M_PI * 2.0) * multiples);
    }
 
-   else if (radians < 0)
+   else if (radians < 0.0)
    {
-      while (radians < 0)
-      {
-         radians += 2 * M_PI;
-      }
+      double multiples = ceil(-radians / (M_PI * 2.0));
+      return (M_PI * 2.0) * multiples + radians;
    }
 
    return radians;
